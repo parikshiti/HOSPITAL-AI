@@ -16,7 +16,7 @@ $(document).ready(function() {
              diseasesScoresCheckboxes.push(diseaseScoreCheckbox)
          }
 
-         $('#add-new-patient').dataTable({
+         $('#add-new-doctor').dataTable({
                data: diseasesScoresCheckboxes,
                columns:
                [

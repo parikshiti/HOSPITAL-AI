@@ -7,12 +7,16 @@ const router = express.Router();
 var {scoreOfDisease, Disease} = require('./../server/models/diseases.js');
 var {Patient} = require('./../server/models/patient.js');
 var {rooms, Room} = require('./../server/models/rooms');
+var {Doctor} = require('./../server/models/doctors');
 
 /*
     GET /app/ -> simply render the page
 */
 router.get('/app', (req, res) => {
     res.status(200).render('dashboard');
+});
+router.get('/app/searchdoctor', (req, res) => {
+    res.status(200).render('doctors');
 });
 
 module.exports = router;

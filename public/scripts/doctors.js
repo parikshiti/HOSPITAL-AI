@@ -6,7 +6,7 @@ var freeRoomsTableConstructor = [];
 var dynamicTableClickable = true;
 
 $(document).ready(function() {
-  var patientsAPI = URL + "/app/getpatients";
+  var patientsAPI = URL + "/app/getdoctors";
   $.getJSON(patientsAPI).done(function(patients) {
 	  var roomsAPI = URL + "/app/getrooms";
 	  $.getJSON(roomsAPI).done(function(rooms1) {
@@ -32,13 +32,8 @@ $(document).ready(function() {
 
                  var timeDifferenceInMinutes = Math.abs(timeDifference) / 60 / 1000;
 
-                 // check if he need to be updated
-                 // @@@@@@@@@@@@@@@@@@@@@@@@@@ -> need to change the time for the interval to be updated
-                 if (timeDifferenceInMinutes > 1440) {
-                    patientsRowConstructor.push("<span class=\"glyphicon glyphicon-warning-sign\" style=\"color: red;\"></span>   " + patient["firstName"] + " " + patient["lastName"]);
-                 } else {
-                    patientsRowConstructor.push(patient["firstName"] + " " + patient["lastName"]);
-                 }
+                 patientsRowConstructor.push(patient["firstName"] + " " + patient["lastName"]);
+
 
 
 			  if(patient["room"] === "noroom") {
@@ -71,7 +66,7 @@ $(document).ready(function() {
 		       resposnive: true,
 		       info: false,
                  language: {
-                   searchPlaceholder: "Search patient waiting...",
+                   searchPlaceholder: "Search doctors waiting...",
                    sSearch: ""
                  },
                aaSorting: [[2, 'desc']],
@@ -97,7 +92,7 @@ $(document).ready(function() {
 	                title: "<span class=\"fa fa-hospital-o fa-fw\" style=\"color: black;\"></span>   " + "  no.",
                      width: "25%"
 	            },{
-	                title: "Patients with rooms",
+	                title: "Doctor with rooms",
                      width: "45%"
 	            },{
 	           	 title: "Room",
@@ -112,7 +107,7 @@ $(document).ready(function() {
 		        resposnive: true,
 		        info: false,
                   language: {
-                       searchPlaceholder: "Search patient in room...",
+                       searchPlaceholder: "Search doctor in room...",
                        sSearch: ""
                 },
                 aaSorting: [[3, 'desc']],
@@ -177,18 +172,6 @@ $(function() {
          hospitalNumberToBeWaiting = hospitalNumberToBeWaiting.textContent;
          clicks++;
          var clicks_when_called = clicks;
-
-           $("body").on('click', '#patients-waiting > tbody > tr', function() {
-             var hospitalNumberToBeAdmitted = $(this).children('td')[0];
-             hospitalNumberToBeAdmitted = hospitalNumberToBeAdmitted.textContent;
-             if (clicks_when_called + 1 === clicks) {
-                  if (confirm('Do you want to make the change?')) {
-                    window.location.href = URL + "/app/swappatients/" + hospitalNumberToBeWaiting + "/" + hospitalNumberToBeAdmitted;
-                  } else {
-                    window.location.href = URL +"/app/";
-                  }
-              }
-          });
      });
 });
 
@@ -211,18 +194,6 @@ $(function(){
                     window.location.href = URL + "/app/";
                   }
               }
-              $("body").on('click', '#patients-in-hospital > tbody > tr', function() {
-                  var hospitalNumberToBeWaiting = $(this).children('td')[0];
-                  hospitalNumberToBeWaiting = hospitalNumberToBeWaiting.textContent;
-
-                  if (clicks_when_called + 1 === clicks) {
-                       if (confirm('Do you want to make the change?')) {
-                         window.location.href = URL +"/app/swappatients/" + hospitalNumberToBeWaiting + "/" + hospitalNumberToBeAdmitted;
-                       } else {
-                         window.location.href = URL +"/app/";
-                       }
-                  }
-               });
            });
      });
 });
@@ -251,11 +222,11 @@ $(function(){
 $("body").on('dblclick', '#patients-in-hospital > tbody > tr', function() {
       var NHSnumber = $(this).children('td')[0];
       NHSnumber = NHSnumber.textContent;
-      window.location.href = URL + "/app/patient/" + NHSnumber;
+      window.location.href = URL + "/app/doctor/" + NHSnumber;
 });
 
 $("body").on('dblclick', '#patients-waiting > tbody > tr', function() {
      var NHSnumber = $(this).children('td')[0];
      NHSnumber = NHSnumber.textContent;
-     window.location.href = URL + "/app/patient/" + NHSnumber;
+     window.location.href = URL + "/app/doctor/" + NHSnumber;
 });
