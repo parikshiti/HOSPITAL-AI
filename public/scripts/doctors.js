@@ -54,7 +54,7 @@ $(document).ready(function() {
 		       	 title: "<span class=\"fa fa-hospital-o fa-fw\" style=\"color: black;\"></span>   " + "  no.",
                      width: "30%"
 		       }, {
-		           title: "Patients waiting",
+		           title: "Doctors waiting",
                      width: "60%"
 		       }, {
 		           title: "Score",

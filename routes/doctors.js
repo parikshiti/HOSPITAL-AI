@@ -71,7 +71,7 @@ router.post('/app/adddoctor', (req, res) => {
 
         doctor.save().then((doctor) => {
             doctor.updateScore();
-            res.status(200).redirect('/app');
+            res.status(200).redirect('/app/searchdoctor');
         }).catch((err) => {
             console.log(err);
             res.status(400).redirect('/app');
